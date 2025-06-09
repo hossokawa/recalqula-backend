@@ -2,34 +2,50 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from .serializers import CalculationInputSerializer, CalculationResultSerializer
+from .functions import calcular_potencia_dados
 
 
 class CalculatePumpPowerView(APIView):
     def post(self, request, *args, **kwargs):
         serializer = CalculationInputSerializer(data=request.data)
         if serializer.is_valid():
-            # Extract validated data
             data = serializer.validated_data
 
-            # --- Perform your pump power calculation here ---
-            # This is a placeholder for your actual calculation logic
-            # For demonstration, let's just echo back some data and a dummy power.
-            potencia_estimada = (
-                data["diametroSuccao"]
-                * data["comprimentoRecalque"]
-                * data["vazao"]
-            ) / 100.0
-            message = "Cálculo realizado com sucesso!"
+            print(data)
+            resultados = calcular_potencia_dados(data)
+            msg = "Cálculo realizado com sucesso!"
 
-            result = {
+            resultado = {
                 "sucesso": True,
-                "potencia_estimada": potencia_estimada,
-                "mensagem": message,
-                "received_data": data,  # Echo back received data for debugging/verification
+                "mensagem": msg,
+                "received_data": data,
+                "potencia_estimada": resultados["potencia"],
+                "altura_manometrica": resultados["altura_manometrica"],
+                "vazao": resultados["vazao"],
+                "velocidade_succao": resultados["velocidade_succao"],
+                "reynolds_succao": resultados["reynolds_succao"],
+                "tipo_fluxo_succao": resultados["tipo_fluxo_succao"],
+                "fator_atrito_succao": resultados["fator_atrito_succao"],
+                "perda_carga_continua_succao": resultados["hf_continua_succao"],
+                "perda_carga_localizada_succao": resultados[
+                    "hf_localizada_succao"
+                ],
+                "perda_carga_total_succao": resultados["hf_total_succao"],
+                "velocidade_recalque": resultados["velocidade_recalque"],
+                "reynolds_recalque": resultados["reynolds_recalque"],
+                "tipo_fluxo_recalque": resultados["tipo_fluxo_recalque"],
+                "fator_atrito_recalque": resultados["fator_atrito_recalque"],
+                "perda_carga_continua_recalque": resultados[
+                    "hf_continua_recalque"
+                ],
+                "perda_carga_localizada_recalque": resultados[
+                    "hf_localizada_recalque"
+                ],
+                "perda_carga_total_recalque": resultados["hf_total_recalque"],
+                "perda_carga_total": resultados["hf_total_succao"]
+                + resultados["hf_total_recalque"],
             }
-            result_serializer = CalculationResultSerializer(data=result)
-            result_serializer.is_valid(
-                raise_exception=True
-            )  # Ensure the result matches the schema
+            result_serializer = CalculationResultSerializer(data=resultado)
+            result_serializer.is_valid(raise_exception=True)
             return Response(result_serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
