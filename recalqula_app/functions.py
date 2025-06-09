@@ -137,7 +137,7 @@ def calcular_potencia_dados(data):
     hf_rec = hf_rec_cont + hf_rec_local
 
     H = altura_rec + altura_suc + hf_suc + hf_rec
-    pot_util = peso_especifico * vazao_m3s * H
+    pot_util = (peso_especifico * vazao_m3s * H) / 1000
 
     vazao_m3h = round(converter_vazao_para_m3h(vazao_m3s), 2)
 
