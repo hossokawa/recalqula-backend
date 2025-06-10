@@ -8,20 +8,34 @@ Recalqula é uma calculadora web para projetos de recalque que ingere alguns dad
 
 ## Execução
 1. Clone o repositório usando:
-`git clone https://github.com/hossokawa/recalqula-backend.git`
+```
+git clone https://github.com/hossokawa/recalqula-backend.git
+```
 Ou baixe e extraia o projeto no seu computador.
 2. Abra a pasta do projeto no seu terminal
-`cd caminho/para/o/projeto`
+```
+cd caminho/para/o/projeto
+```
 3a. Caso não tenha a ferramenta `uv` instalada, instale as dependências usando o pip:
-`pip install .`
+```
+pip install .
+```
 Ou se estiver usando Windows:
-`py -m pip install .`
+```
+py -m pip install .
+```
 3b. Caso tenha `uv` instalado, basta executar este comando:
-`uv run .\manage.py runserver`
+```
+uv run .\manage.py runserver
+```
 4. Após instalar as dependências, basta executar este comando:
-`python .\manage.py runserver`
+```
+python .\manage.py runserver
+```
 Ou se estiver usando Windows:
-`py .\manage.py runserver`
+```
+py .\manage.py runserver
+```
 5. Acesse a url local mostrada no seu terminal (o padrão é http://localhost:8000)
 
 ## Funcionalidades
