@@ -7,11 +7,10 @@ Recalqula é uma calculadora web para projetos de recalque que ingere alguns dad
 - Terminal (CMD, Powershell, etc.)
 
 ## Execução
-1. Clone o repositório usando:
+1. Baixe e extraia o projeto no seu computador ou clone o repositório usando:
 ```
 git clone https://github.com/hossokawa/recalqula-backend.git
 ```
-Ou baixe e extraia o projeto no seu computador.
 2. Abra a pasta do projeto no seu terminal
 ```
 cd caminho/para/o/projeto
