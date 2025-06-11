@@ -7,9 +7,13 @@ def calcular_fator_atrito(reynolds, rugosidade, diametro):
     else:
         try:
             # Equação de Swamee-Jain
-            return 0.25 / (
-                log10(
-                    ((rugosidade / diametro) / 3.7) + (5.74 / (reynolds**0.9))
+            return (
+                0.25
+                / (
+                    log10(
+                        ((rugosidade / diametro) / 3.7)
+                        + (5.74 / (reynolds**0.9))
+                    )
                 )
                 ** 2
             )
